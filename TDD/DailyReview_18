@@ -1,0 +1,39 @@
+### 18장. xUnit으로 가는 첫걸음
+
+2장은 Junit5처럼 테스트 프레임워크를 만드는 것이다.
+테스트 프레임 워크를 TDD로 만드는데, 첫 시작은 테스트 메서드 호출하기이다.
+
+테스트 메서드를 호출하고 이를 검증하기 위해
+
+test = WasRun("testMethod")
+print test.wasRun
+test.testMethod()
+print(test.wasRun)
+
+을 작성했다.
+
+test 객체도 없고 WasRun도 없다.
+
+```
+class WasRun:
+  pass
+```
+정도로 작성하고 초록막대를 향해 계속 작성한다.
+
+결과적으로 TestCase라는 상위 클래스 아래 WasRun이 존재하고
+TestCase는 name 필드와 run 메서드를 가지고
+WasRun은 wasRun 필드를 가진다.
+
+```
+class TestCaseTest(TestCase):
+  def testRunning(self):
+    test = WasRun("testMethod")
+    assert(not test.wasRun)
+    test.run()
+    assert(test.wasRun)
+```
+처럼 익숙한 테스트 코드가 작성된다.
+
+우선 하드코딩을 한 후에 변수로 바꿔주는 등의 리팩토링 방식은 좀 익숙해졌으나
+
+WasRun 클래스를 만들고 상위로 TestCase를 만들어 상속하게 하는 구현을 다시 봐야겠다.
